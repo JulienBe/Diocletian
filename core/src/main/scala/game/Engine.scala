@@ -3,8 +3,9 @@ package game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import game.objects.{MagicPot, Thing}
+import game.objects.Thing
 import game.show.Show
+import game.world.MagicPot
 
 /**
  * Created by julien on 05/08/15.
