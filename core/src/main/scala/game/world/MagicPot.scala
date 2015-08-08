@@ -1,6 +1,6 @@
 package game.world
 
-import game.objects.{BlocMaker, Blocs, Thing}
+import game.objects.{Cell, BlocMaker, Blocs, Thing}
 import wizardry.Mathgician
 
 import scala.util.Random
@@ -21,7 +21,7 @@ class MagicPot {
       while (col < initColumns) {
         val bloc: Blocs = createBloc(1, 2, 1.2f)
         col += bloc.lvl
-        grid.place(bloc, row, col)
+        grid.place(bloc, Cell(row, col))
       }
     }
 

@@ -7,9 +7,12 @@ import com.badlogic.gdx.math.Vector2
  */
 class Blocs extends Thing {
 
+  var width = 3
+  var height = 1
   var lvl = 1
   val pos = new Vector2()
   val bricks: List[Bricks] = Nil
+
 
   def setLvl(i: Int) = {
     lvl = i
