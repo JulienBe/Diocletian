@@ -3,9 +3,11 @@ package game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import game.objects.Thing
+import game.objects.{Thing}
 import game.show.Show
 import game.world.MagicPot
+
+import scala.collection.mutable
 
 /**
  * Created by julien on 05/08/15.
@@ -15,8 +17,8 @@ class Engine {
   val time = 0f
   val show = new Show
   val magicPot = new MagicPot
-  val blocs: List[Thing] = Nil
-  val balls: List[Thing] = Nil
+  val blocs: mutable.MutableList[Thing] = mutable.MutableList()
+  val balls: mutable.MutableList[Thing] = mutable.MutableList()
 
   def init() = {
     magicPot create blocs

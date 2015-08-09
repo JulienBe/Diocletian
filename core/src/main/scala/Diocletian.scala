@@ -8,12 +8,10 @@ import game.Engine
 class Diocletian extends Game {
 
     var batch: SpriteBatch = null
-    var img: Texture = null
     var game: Engine = null
 
     override def create() {
         batch = new SpriteBatch
-        img = new Texture("badlogic.jpg")
         game = new Engine
         game.init()
     }
