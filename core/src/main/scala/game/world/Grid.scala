@@ -37,7 +37,7 @@ class Grid {
 
 object GridValue {
 
-  val maxColumns = 25
+  val maxColumns = 24
   val maxRows = 18
   val uW = Gdx.graphics.getWidth / maxColumns
   val uH = Gdx.graphics.getHeight / 40f
@@ -45,11 +45,6 @@ object GridValue {
   val cellHeight = uH
   val sideOffset = 0//(Gdx.graphics.getWidth - (cellWidth * (maxColumns + 1))) / 2
 
-  def getColX(cell: Cell): Float = {
-    GridValue.sideOffset + (cell.col * GridValue.cellWidth)
-  }
-
-  def getRowY(cell: Cell): Float = {
-    (cell.row) * cellHeight
-  }
+  def getColX(cell: Cell): Float = cell.col * GridValue.cellWidth
+  def getRowY(cell: Cell): Float = Gdx.graphics.getHeight - (cell.row * cellHeight)
 }

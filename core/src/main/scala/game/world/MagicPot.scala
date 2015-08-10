@@ -13,17 +13,16 @@ class MagicPot {
 
   val rand = new Random
   val initRows = 6
-  val initColumns = 21
   val grid = new Grid
 
   def create(blocs: mutable.MutableList[Thing]) = {
     for (row <- 0 until initRows) {
       var col = 0
-      while (col < initColumns) {
+      while (col < GridValue.maxColumns) {
         val bloc: Blocs = createBloc(1, 2, 1.2f)
-        col += bloc.lvl
         grid.place(bloc, Cell(row, col))
         blocs += bloc
+        col += bloc.colSpan
       }
     }
   }

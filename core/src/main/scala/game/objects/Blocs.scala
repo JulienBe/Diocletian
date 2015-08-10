@@ -27,6 +27,7 @@ object BlocMaker {
   def newBloc(lvl: Int): Blocs = {
     val b = new Blocs()
     b.lvl = lvl
+    b.width = GridValue.cellWidth * 3
     b
   }
 
