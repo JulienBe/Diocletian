@@ -19,7 +19,8 @@ object Settings {
     scalaVersion := (scalaVersion in LocalProject("all-platforms")).value,
     libraryDependencies ++= Seq(
       "com.badlogicgames.gdx" % "gdx" % libgdxVersion.value,
-      "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test"
+      "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test",
+      "org.scalamock" %% "scalamock-scalatest-support" % "3.2"
     ),
     javacOptions ++= Seq(
       "-Xlint",
