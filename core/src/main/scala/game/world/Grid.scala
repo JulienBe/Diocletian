@@ -9,20 +9,20 @@ import game.objects.{Cell, Blocs}
 class Grid {
   // probably want to move to a flat array later
   // TRUE : Taken
-  val grid = Array.fill[Boolean](GridValue.maxColumns, GridValue.maxRows)(false)
+  val grid = Array.fill[Boolean](GridValue.maxRows, GridValue.maxColumns)(false)
 
   def canFit(bloc: Blocs, cell: Cell): Boolean = {
-    for (c <- cell.col until cell.col + bloc.colSpan; if (c >= GridValue.maxColumns))
-      for (r <- cell.row until cell.row + bloc.rowSpan; if (r >= GridValue.maxRows))
-        if (grid(c)(r))
+    for (r <- cell.row until cell.row + bloc.rowSpan)
+      for (c <- cell.col until cell.col + bloc.colSpan)
+        if (grid(r)(c))
           return false
     true
   }
 
   def forcePlace(bloc: Blocs, cell: Cell) = {
-    for (c <- cell.col until cell.col + bloc.colSpan; if (c >= GridValue.maxColumns))
-      for (r <- cell.row until cell.row + bloc.rowSpan; if (r >= GridValue.maxRows))
-        grid(c)(r) = true
+    for (r <- cell.row until cell.row + bloc.rowSpan)
+      for (c <- cell.col until cell.col + bloc.colSpan)
+        grid(r)(c) = true
   }
 
   def place(bloc: Blocs, cell: Cell) = {
@@ -39,12 +39,15 @@ object GridValue {
 
   val maxColumns = 24
   val maxRows = 18
-  val uW = Gdx.graphics.getWidth / maxColumns
-  val uH = Gdx.graphics.getHeight / 40f
+  val height = Gdx.graphics.getHeight
+  val width = Gdx.graphics.getWidth
+
+  val uW = height / maxColumns
+  val uH = width / 40f
   val cellWidth = uW
   val cellHeight = uH
   val sideOffset = 0//(Gdx.graphics.getWidth - (cellWidth * (maxColumns + 1))) / 2
 
   def getColX(cell: Cell): Float = cell.col * GridValue.cellWidth
-  def getRowY(cell: Cell): Float = Gdx.graphics.getHeight - (cell.row * cellHeight)
+  def getRowY(cell: Cell): Float = height - (cell.row * cellHeight)
 }

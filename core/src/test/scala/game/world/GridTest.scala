@@ -15,24 +15,26 @@ class GridTest extends FlatSpec with Matchers with MockFactory{
     GdxMock.graphics
 
     val grid = new Grid
-    val bloc: Blocs = BlocMaker.newBloc(1)
-    grid canFit(bloc, Cell(0, 0)) should be(true)
-    grid.forcePlace(bloc, Cell(0, 0))
-    grid canFit(bloc, Cell(0, 0)) should be(false)
-    grid canFit(bloc, Cell(0, 1)) should be(false)
-
-    grid canFit(bloc, Cell(1, 2)) should be(true)
-    grid.forcePlace(bloc, Cell(1,2))
-    grid canFit(bloc, Cell(1, 2)) should be(false)
-    grid canFit(bloc, Cell(1, 3)) should be(false)
-    grid canFit(bloc, Cell(1, 4)) should be(false)
-    grid canFit(bloc, Cell(1, 1)) should be(false)
-    grid canFit(bloc, Cell(1, 5)) should be(true)
-    grid canFit(bloc, Cell(2, 2)) should be(true)
+    val lvl1: Blocs = BlocMaker.newBloc(1)
+    grid canFit(lvl1, Cell(0, 0)) should be(true)
+    grid.place(lvl1, Cell(0, 0))
+    grid.grid(0)(0) should be(true)
+    grid.grid(0)(1) should be(true)
+    grid.grid(0)(2) should be(true)
+    grid.grid(0)(3) should be(false)
+    grid.grid(1)(0) should be(false)
+    grid.grid(1)(1) should be(false)
+    grid.grid(1)(2) should be(false)
 
     val lvl2 = BlocMaker.newBloc(2)
-    grid.forcePlace(bloc, Cell(4, 4))
-  }
+    grid place(lvl2, Cell(4, 6))
+    for (col <- 6 until 9) {
+      grid.grid(3)(col) should be(false)
+      grid.grid(4)(col) should be(true)
+      grid.grid(5)(col) should be(true)
+      grid.grid(6)(col) should be(false)
+    }
 
+  }
 
 }
