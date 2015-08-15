@@ -2,20 +2,18 @@ package game.objects
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import game.world.{Physic, GridValue}
 
 /**
  * Created by julien on 05/08/15.
  */
-class Thing {
+class Thing(var x: Float, var y: Float, var width: Float, var height: Float) {
 
-  var x = 0f
-  var y = 0f
-  var width = 3f
-  var height = 1f
-
-  def display(batch: SpriteBatch) = {
-    batch.draw(BasicThing.texture, x, y, width - 1, height - 1)
-  }
+  def this() { this(0,0,0,0) }
+  def isInBoundary: Boolean = Physic.isDisplayedCompletely(this)
+  def display(batch: SpriteBatch) = batch.draw(BasicThing.texture, x, y, width - 1, height - 1)
+  def overlap(other: Thing) =
+    x < other.x + other.width && x + width > other.x && y < other.y + other.height && y + height > other.y
 
 }
 
