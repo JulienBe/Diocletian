@@ -28,8 +28,7 @@ class Grid {
   def place(bloc: Blocs, cell: Cell) = {
     if (canFit(bloc, cell)) {
       forcePlace(bloc, cell)
-      bloc.x = GridValue.getColX(cell)
-      bloc.y = GridValue.getRowY(cell)
+      bloc.place(cell)
     }
   }
 
@@ -46,8 +45,7 @@ object GridValue {
   val uH = width / 40f
   val cellWidth = uW
   val cellHeight = uH
-  val sideOffset = 0//(Gdx.graphics.getWidth - (cellWidth * (maxColumns + 1))) / 2
 
-  def getColX(cell: Cell): Float = cell.col * GridValue.cellWidth
-  def getRowY(cell: Cell): Float = height - (cell.row * cellHeight)
+  def getColX(cell: Cell) = cell.col * GridValue.cellWidth
+  def getRowY(cell: Cell) = height - (cell.row * cellHeight)
 }

@@ -11,6 +11,7 @@ class PhysicTest extends FlatSpec with Matchers {
 
   it should "be able to test a thing is displayed completely" in {
     GdxMock.graphics
+
     Physic.isDisplayedCompletely(new Thing(0,                   0,                    1,  1 )) should be (true)
     Physic.isDisplayedCompletely(new Thing(-1,                  0,                    1,  1 )) should be (false)
     Physic.isDisplayedCompletely(new Thing(0,                   -1,                   1,  1 )) should be (false)
@@ -24,6 +25,7 @@ class PhysicTest extends FlatSpec with Matchers {
 
   it should "determine if a bloc is within the grid" in {
     GdxMock.graphics
+
     val bloc = BlocMaker.newBloc(1)
     bloc.cell = new Cell(0, 0)
     Physic.isWithinGrid(bloc) should be(true)

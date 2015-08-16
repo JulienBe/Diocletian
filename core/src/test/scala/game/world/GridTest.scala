@@ -37,4 +37,17 @@ class GridTest extends FlatSpec with Matchers with MockFactory{
 
   }
 
+  it should "predict a bloc X and Y based on his cell" in {
+    GdxMock graphics
+
+    GridValue.getColX(new Cell(0, 0)) should be(0)
+    GridValue.getRowY(new Cell(0, 0)) should be(GridValue.height)
+
+    GridValue.getColX(new Cell(3, 1)) should be(GridValue.cellWidth)
+    GridValue.getRowY(new Cell(1, 3)) should be(GridValue.height - GridValue.cellHeight)
+
+    GridValue.getColX(new Cell(3, 7)) should be(GridValue.cellWidth * 7)
+    GridValue.getRowY(new Cell(7, 3)) should be(GridValue.height - GridValue.cellHeight * 7)
+  }
+
 }
