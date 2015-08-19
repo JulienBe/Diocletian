@@ -20,11 +20,15 @@ class MagicPot {
       var col = 0
       while (col < GridValue.maxColumns) {
         val bloc: Blocs = createBloc(1, 2, 1.2f)
-        grid.place(bloc, Cell(row, col))
-        blocs += bloc
+        val cell = Cell(row, col)
+        if (grid.canFit(bloc, cell)) {
+          grid.place(bloc, cell)
+          blocs += bloc
+        }
         col += bloc.colSpan
       }
     }
+    blocs
   }
 
   def createBloc(minLvl: Int, maxLvl: Int, averageLvl: Float): Blocs = {
@@ -32,5 +36,4 @@ class MagicPot {
       Math.round(Mathgician.invokeNumber(1, 2, 1.2f))
     )
   }
-
 }
