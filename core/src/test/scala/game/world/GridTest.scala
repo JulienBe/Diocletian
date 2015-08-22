@@ -15,32 +15,32 @@ class GridTest extends FlatSpec with Matchers with MockFactory{
     GdxMock.graphics
 
     val grid = new Grid
-    val lvl1: Blocs = BlocMaker.newBloc(1)
-    grid canFit(lvl1, Cell(0, 0)) should be(true)
-    grid.place(lvl1, Cell(0, 0))
+    val lvl0: Blocs = BlocMaker.newBloc(0)
+    grid canFit(lvl0, Cell(0, 0)) should be(true)
+    grid.place(lvl0, Cell(0, 0))
 
     testGrid(grid, 0, 0, 0, 2, true)
     grid.grid(0)(3) should be(false)
     testGrid(grid, 1, 1, 0, 2, false)
 
-    val lvl2 = BlocMaker.newBloc(2)
-    grid.canFit(lvl2, Cell(2, 6)) should be(true)
-    grid.place(lvl2, Cell(2, 6))
-    grid.canFit(lvl2, Cell(4, 6)) should be(true)
-    grid.canFit(lvl2, Cell(0, 6)) should be(true)
-    grid.canFit(lvl2, Cell(2, 3)) should be(true)
-    grid.canFit(lvl2, Cell(2, 9)) should be(true)
-    grid.canFit(lvl2, Cell(3, 4)) should be(false)
-    grid.canFit(lvl2, Cell(1, 4)) should be(false)
-    grid.canFit(lvl2, Cell(1, 8)) should be(false)
-    grid.canFit(lvl2, Cell(3, 8)) should be(false)
-
+    val lvl1 = BlocMaker.newBloc(1)
+    grid.canFit(lvl1, Cell(2, 6)) should be(true)
+    grid.place(lvl1, Cell(2, 6))
     grid.canFit(lvl1, Cell(4, 6)) should be(true)
-    grid.place(lvl1, Cell(4, 6))
-    grid.canFit(lvl1, Cell(3, 9)) should be(true)
-    grid.place(lvl1, Cell(3, 9))
-    grid.canFit(lvl1, Cell(4, 9)) should be(true)
-    grid.place(lvl1, Cell(4, 9))
+    grid.canFit(lvl1, Cell(0, 6)) should be(true)
+    grid.canFit(lvl1, Cell(2, 3)) should be(true)
+    grid.canFit(lvl1, Cell(2, 9)) should be(true)
+    grid.canFit(lvl1, Cell(3, 4)) should be(false)
+    grid.canFit(lvl1, Cell(1, 4)) should be(false)
+    grid.canFit(lvl1, Cell(1, 8)) should be(false)
+    grid.canFit(lvl1, Cell(3, 8)) should be(false)
+
+    grid.canFit(lvl0, Cell(4, 6)) should be(true)
+    grid.place(lvl0, Cell(4, 6))
+    grid.canFit(lvl0, Cell(3, 9)) should be(true)
+    grid.place(lvl0, Cell(3, 9))
+    grid.canFit(lvl0, Cell(4, 9)) should be(true)
+    grid.place(lvl0, Cell(4, 9))
   }
 
   def testGrid(grid: Grid, startRow: Int, endRow: Int, startCol: Int, endCol: Int, result: Boolean) = {

@@ -41,6 +41,14 @@ class BlocsTest extends FlatSpec with Matchers {
     b1.overlap(b2) should be(true)
   }
 
-
+  it should "be able to change its level" in {
+    val bloc = new Blocs
+    for (lvl <- 0 until 7) {
+      bloc.setLvl(lvl)
+      bloc.lvl should be(lvl)
+      bloc.colSpan should be(LevelDimension.lvls(lvl).colSpan)
+      bloc.rowSpan should be(LevelDimension.lvls(lvl).rowSpan)
+    }
+  }
 
 }
