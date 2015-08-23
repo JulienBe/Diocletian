@@ -7,20 +7,31 @@ import org.scalatest.{Matchers, FlatSpec}
  */
 class MathgicianTest extends FlatSpec with Matchers {
 
+  def loopNumber = 1000000
+
   it should "produce appropriate deviant float" in {
-    testAverage(Mathgician.getDeviantRand, 0.5f)
-    testAverage(Mathgician.getDeviantRand, 0.25f)
-    testAverage(Mathgician.getDeviantRand, 0.6678f)
-    testAverage(Mathgician.getDeviantRand, 1.75f)
-    testAverage(Mathgician.getDeviantRand, -1.75f)
+    testAverageLoop(Mathgician.getDeviantRand, 0.5f)
+    testAverageLoop(Mathgician.getDeviantRand, 0.25f)
+    testAverageLoop(Mathgician.getDeviantRand, 0.6678f)
+    testAverageLoop(Mathgician.getDeviantRand, 1.75f)
+    testAverageLoop(Mathgician.getDeviantRand, -1.75f)
   }
 
-  def testAverage(method: (Float) => Float, target: Float) = {
+  def testAverageLoop(method: (Float) => Float, target: Float) = {
     var average = 0f
-    for (i <- 1 to 10000000)
+    for (i <- 1 to loopNumber)
       average += method(target)
-    (average / 10000000) should be (target +- 0.03f)
+    verifyAverage(target, average / loopNumber)
   }
+
+  def testAverageLoop(method: (Float, Float, Float) => Float, min: Float, max: Float, target: Float, verify: (Float, Float) => Unit) = {
+    var average = 0f
+    for (i <- 1 to loopNumber)
+      average += method(min, max, target)
+    verify(target, average / loopNumber)
+  }
+
+  def verifyAverage(target: Float, average: Float) = average should be(target +- 0.03f)
 
   it should "be smart enough to calculate the pivot(al)" in {
     Mathgician.getPivot(0, 1, 0.5f)   should be(0.5f)
