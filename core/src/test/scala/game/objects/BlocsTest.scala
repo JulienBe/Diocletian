@@ -51,4 +51,12 @@ class BlocsTest extends FlatSpec with Matchers {
     }
   }
 
+  it should "add correct number of bricks" in {
+    for (lvl <- 0 until 7) {
+      val bloc = BlocMaker.newBloc(lvl)
+      bloc.place(Cell(0, 0))
+      bloc.bricks.length should be(lvl + 1)
+    }
+  }
+
 }
