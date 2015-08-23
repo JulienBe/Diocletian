@@ -3,24 +3,26 @@ package game.objects
 import com.badlogic.gdx.math.Rectangle
 import game.world.GridValue
 
+import scala.collection.mutable.ListBuffer
+
 /**
  * Created by julien on 06/08/15.
  */
 class Blocs extends Thing {
 
-  val bricks: List[Bricks] = Nil
-  var cell: Cell = Cell(0, 0)
+  val bricks: ListBuffer[Bricks] = ListBuffer()
+  var toLeftCell: Cell = Cell(0, 0)
   var colSpan = 3
   var rowSpan = 1
   var lvl = 0
 
-  def place(cell: Cell) = {
-    this.x = GridValue.getColXLeft(cell)
-    this.y = GridValue.getRowYBottom(cell)
-    this.cell = cell
+  def place(topLeftCell: Cell) = {
+    this.x = GridValue.getColXLeft(topLeftCell)
+    this.y = GridValue.getRowYTop(topLeftCell) - (rowSpan * GridValue.cellHeight)
+    this.toLeftCell = topLeftCell
   }
 
-  def setRectangleToGridSpan(r: Rectangle) = r.set(cell.row, cell.col, rowSpan, colSpan)
+  def setRectangleToGridSpan(r: Rectangle) = r.set(toLeftCell.row, toLeftCell.col, rowSpan, colSpan)
   def setLvl(i: Int) = {
     lvl = i
     colSpan = LevelDimension.lvls(lvl).colSpan

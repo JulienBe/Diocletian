@@ -37,7 +37,7 @@ class Grid {
 object GridValue {
 
   val maxColumns = 24
-  val maxRows = 24
+  val maxRows = 36
   val height = Gdx.graphics.getHeight
   val width = Gdx.graphics.getWidth
 
@@ -47,6 +47,6 @@ object GridValue {
   val cellHeight = height / maxRows
 
   def getColXLeft(cell: Cell) = cell.col * GridValue.cellWidth
-  def getRowYBottom(cell: Cell) = height - ((cell.row + 1) * cellHeight) 
+  def getRowYTop(cell: Cell) = height - (cell.row  * cellHeight)
 
 }

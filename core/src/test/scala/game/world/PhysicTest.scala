@@ -27,19 +27,19 @@ class PhysicTest extends FlatSpec with Matchers {
     GdxMock.graphics
 
     val bloc = BlocMaker.newBloc(1)
-    bloc.cell = new Cell(0, 0)
+    bloc.toLeftCell = new Cell(0, 0)
     Physic.isWithinGrid(bloc) should be(true)
-    bloc.cell = new Cell(-1, 0)
+    bloc.toLeftCell = new Cell(-1, 0)
     Physic.isWithinGrid(bloc) should be(false)
-    bloc.cell = new Cell(0, -1)
+    bloc.toLeftCell = new Cell(0, -1)
     Physic.isWithinGrid(bloc) should be(false)
-    bloc.cell = new Cell(GridValue.maxRows - bloc.rowSpan, 0)
+    bloc.toLeftCell = new Cell(GridValue.maxRows - bloc.rowSpan, 0)
     Physic.isWithinGrid(bloc) should be(true)
-    bloc.cell = new Cell(1 + GridValue.maxRows - bloc.rowSpan, 0)
+    bloc.toLeftCell = new Cell(1 + GridValue.maxRows - bloc.rowSpan, 0)
     Physic.isWithinGrid(bloc) should be(false)
-    bloc.cell = new Cell(0, GridValue.maxColumns - bloc.colSpan)
+    bloc.toLeftCell = new Cell(0, GridValue.maxColumns - bloc.colSpan)
     Physic.isWithinGrid(bloc) should be(true)
-    bloc.cell = new Cell(0, 1 + GridValue.maxColumns - bloc.colSpan)
+    bloc.toLeftCell = new Cell(0, 1 + GridValue.maxColumns - bloc.colSpan)
     Physic.isWithinGrid(bloc) should be(false)
   }
 

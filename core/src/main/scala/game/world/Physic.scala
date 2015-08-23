@@ -8,6 +8,6 @@ import game.objects.{Blocs, Thing}
 object Physic {
 
   def isDisplayedCompletely(t: Thing) = t.x >= 0 && t.x + t.width <= GridValue.width && t.y >= 0 && t.y + t.height <= GridValue.height
-  def isWithinGrid(b: Blocs) = b.cell.row >= 0 && b.cell.col >= 0 && b.cell.row + b.rowSpan <= GridValue.maxRows && b.cell.col + b.colSpan <= GridValue.maxColumns
+  def isWithinGrid(b: Blocs) = b.toLeftCell.row >= 0 && b.toLeftCell.col >= 0 && b.toLeftCell.row + b.rowSpan <= GridValue.maxRows && b.toLeftCell.col + b.colSpan <= GridValue.maxColumns
 
 }

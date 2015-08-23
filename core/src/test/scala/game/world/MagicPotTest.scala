@@ -12,14 +12,19 @@ import scala.collection.mutable
 class MagicPotTest extends FlatSpec with Matchers {
 
   it should "not place blocs outside boundries" in {
-    createWorld.forall(t => t.isInBoundary()) should be(true)
+    for (i <- 0 to 1000)
+      createWorld.forall(t => t.isInBoundary()) should be(true)
   }
 
   it should "not make blocs overlap" in {
-    val blocs = createWorld
-    blocs.forall(
-        b => blocs.forall(other => other.overlap(b))
-    ) should be(false)
+    for (i <- 0 to 1000) {
+      val blocs = createWorld
+      blocs.foreach(
+        b => blocs.foreach(
+          other => other.overlap(b) should be(false)
+        )
+      )
+    }
   }
 
   def createWorld = {

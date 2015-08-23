@@ -18,22 +18,24 @@ class MagicPot {
   def create(blocs: mutable.MutableList[Thing]) = {
     for (row <- 0 until initRows) {
       var col = 0
-      while (col < GridValue.maxColumns) {
-        val bloc: Blocs = createBloc(1, 2, 1.2f)
-        val cell = Cell(row, col)
-        if (grid.canFit(bloc, cell)) {
-          grid.place(bloc, cell)
-          blocs += bloc
-        }
-        col += bloc.colSpan
-      }
+      while (col < GridValue.maxColumns)
+        col += addBloc(blocs, createBloc(0), row, col)
     }
     blocs
   }
 
-  def createBloc(minLvl: Int, maxLvl: Int, averageLvl: Float): Blocs = {
-    BlocMaker.newBloc(
-      Math.round(Mathgician.invokeNumber(1, 2, 1.2f))
-    )
+  def addBloc(blocs: mutable.MutableList[Thing], bloc: Blocs, row: Int, col: Int): Int = {
+    val cell = Cell(row, col)
+    while (!grid.canFit(bloc, cell) && bloc.lvl > 0)
+      bloc.setLvl(bloc.lvl - 1)
+
+    if (bloc.lvl >= 0 && grid.canFit(bloc, cell)) {
+      grid.place(bloc, cell)
+      blocs += bloc
+      return bloc.colSpan
+    }
+    1
   }
+
+  def createBloc(minLvl: Int) = BlocMaker.newBloc(Mathgician.getLevel(minLvl))
 }

@@ -53,13 +53,13 @@ class GridTest extends FlatSpec with Matchers with MockFactory{
     GdxMock graphics
 
     GridValue.getColXLeft(new Cell(0, 0)) should be(0)
-    GridValue.getRowYBottom(new Cell(0, 0)) should be(GridValue.height - GridValue.cellHeight)
+    GridValue.getRowYTop(new Cell(0, 0)) should be(GridValue.height)
 
     GridValue.getColXLeft(new Cell(3, 1)) should be(GridValue.cellWidth)
-    GridValue.getRowYBottom(new Cell(1, 3)) should be(GridValue.height - GridValue.cellHeight * 2)
+    GridValue.getRowYTop(new Cell(1, 3)) should be(GridValue.height - GridValue.cellHeight)
 
     GridValue.getColXLeft(new Cell(3, 7)) should be(GridValue.cellWidth * 7)
-    GridValue.getRowYBottom(new Cell(7, 3)) should be(GridValue.height - GridValue.cellHeight * 8)
+    GridValue.getRowYTop(new Cell(7, 3)) should be(GridValue.height - GridValue.cellHeight * 7)
   }
 
 }
